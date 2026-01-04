@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "team-tools",
-      "source": ".",
+      "source": "./",
       "description": "Timesheet, standup, and coverage gap commands"
     }
   ]
