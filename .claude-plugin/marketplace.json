@@ -1,10 +1,16 @@
 {
   "name": "zcl-claude-code-plugins",
-  "description": "Zero Copy Labs internal productivity tools",
+  "owner": {
+    "name": "Zero Copy Labs"
+  },
+  "metadata": {
+    "description": "Zero Copy Labs internal productivity tools"
+  },
   "plugins": [
     {
       "name": "team-tools",
-      "path": "."
+      "source": ".",
+      "description": "Timesheet, standup, and coverage gap commands"
     }
   ]
 }
