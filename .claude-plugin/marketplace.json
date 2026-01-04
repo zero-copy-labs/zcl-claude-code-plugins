@@ -1,0 +1,10 @@
+{
+  "name": "zcl-claude-code-plugins",
+  "description": "Zero Copy Labs internal productivity tools",
+  "plugins": [
+    {
+      "name": "team-tools",
+      "path": "."
+    }
+  ]
+}
