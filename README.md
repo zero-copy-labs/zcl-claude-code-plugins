@@ -6,26 +6,21 @@ Internal productivity tools for Claude Code.
 
 | Command | Description |
 |---------|-------------|
-| `/timesheet [days]` | Generate weekly commit summary for timesheets |
-| `/standup` | Yesterday's work + today's plan for standups |
-| `/coverage-gaps [threshold]` | Find files with missing or low test coverage |
+| `/team-tools:timesheet [days]` | Generate weekly commit summary for timesheets |
+| `/team-tools:standup` | Yesterday's work + today's plan for standups |
+| `/team-tools:coverage-gaps [threshold]` | Find files with missing or low test coverage |
 
 ## Installation
 
-Add to your Claude Code plugins:
-
-```bash
-claude plugins add /path/to/this/directory
+```
+/plugin marketplace add git@github.com:zero-copy-labs/zcl-claude-code-plugins.git
+/plugin install team-tools@zcl-claude-code-plugins
 ```
 
-Or add to your `.claude/settings.json`:
-
-```json
-{
-  "plugins": [
-    "/path/to/zcl-claude-code-plugins"
-  ]
-}
+Or with HTTPS:
+```
+/plugin marketplace add https://github.com/zero-copy-labs/zcl-claude-code-plugins.git
+/plugin install team-tools@zcl-claude-code-plugins
 ```
 
 ## Command Details
