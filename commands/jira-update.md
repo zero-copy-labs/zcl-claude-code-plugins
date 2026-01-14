@@ -10,10 +10,7 @@ mcp_servers:
 Sync your local git activity with Jira tickets. Fetches your assigned issues, correlates commits by ticket ID, and optionally posts progress updates back to Jira.
 
 ## Usage
-
-`/jira-update` - Full sync: fetch tickets, correlate commits, offer to post updates
 `/jira-update status` - Quick view of your assigned tickets and their status
-`/jira-update post` - Post today's commit summaries as comments to relevant tickets
 
 ## Prerequisites
 
