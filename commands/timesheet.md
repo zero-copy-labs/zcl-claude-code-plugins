@@ -1,91 +1,85 @@
 ---
 name: timesheet
-description: Generate a weekly commit summary for timesheets, grouped by day with ticket ID extraction
+description: Generate a daily timesheet entry from your git commit history, consolidating work by ticket.
 ---
 
 # Timesheet Generator
 
-Generate a copy-paste ready timesheet from your git commit history.
+Generate a consolidated, copy-paste ready timesheet entry for your daily time tracking.
 
 ## Usage
 
-`/timesheet [days]` - Generate timesheet for the last N days (default: 7)
+`/timesheet [period]`
+
+- **No argument**: Generates timesheet for **Today** (since midnight).
+- `yesterday`: Generates timesheet for **Yesterday** (entire 24h period).
+- `[number]`: Generates timesheet for the last N days (e.g. `/timesheet 7`).
 
 ## Instructions
 
 When invoked, follow these steps:
 
-### Step 1: Get Git User Info
+### Step 1: Determine Date Range
 
-Run this command to get the current git user's email:
+- **Default (Today)**: `since="midnight"`
+- **Yesterday**: `since="yesterday 00:00"` and `until="today 00:00"`
+- **N days**: `since="{N} days ago"`
 
+### Step 2: Get Git User Info
+
+Get the current git user's email:
 ```bash
 git config user.email
 ```
 
-### Step 2: Extract Commits
+### Step 3: Extract Commits
 
-Run this command to get commits for the specified date range (replace `{days}` with the argument or default to 7):
+Run this command (adjusting `since`/`until` based on Step 1):
 
 ```bash
-git log --author="$(git config user.email)" --since="{days} days ago" --format="%H|%ad|%s" --date=short
+git log --author="$(git config user.email)" --since="{since}" --until="{until}" --format="%s" --no-merges
 ```
 
-### Step 3: Process and Group
+### Step 4: Process and Consolidate
 
-Parse the output and:
-1. Group commits by date
-2. Extract ticket IDs using these patterns:
-   - JIRA-style: `[A-Z]+-[0-9]+` (e.g., PROJ-123, FEAT-456)
-   - GitHub-style: `#[0-9]+` (e.g., #42, #100)
-3. Summarize commit messages per day
+1. **Extract Ticket IDs**: Look for patterns like `PROJ-123`, `FEAT-456`, or `#[0-9]+` at the start of messages.
+2. **Group by Ticket**: Consolidate multiple commits for the same ticket.
+3. **Summarize**:
+   - If a ticket has multiple commits, combine them into a coherent summary.
+   - Example rule: "Implemented auth flow, Fixed login bug" -> "Implemented auth flow & fixed login bug".
+   - If commits are repetitive (e.g., "wip", "fix"), ignore the noise and focus on the meaningful parts.
 
-### Step 4: Format Output
+### Step 5: Format Output
 
-Present the timesheet in this format:
+Present the timesheet in this format, optimized for pasting into time tracking software:
 
 ```
-TIMESHEET - Week of [start date] to [end date]
+TIMESHEET - [Date or Range]
 
-[Day, Date]
-• [Ticket ID]: [Summary of work]
-• [Ticket ID]: [Summary of work]
+[Ticket ID]
+[Consolidated Summary]
 
-[Day, Date]
-• [Ticket ID]: [Summary of work]
+[Ticket ID]
+[Consolidated Summary]
 
 ---
-Total commits: [count]
-Days with activity: [count]
+Miscellaneous / General:
+- [Commit message without ticket ID]
 ```
-
-### Step 5: Offer Export Options
-
-Ask the user if they want:
-- Plain text (copy-paste ready)
-- Markdown table format
-- CSV format for spreadsheets
 
 ## Example Output
 
 ```
-TIMESHEET - Week of Jan 1 to Jan 7
+TIMESHEET - Tuesday, Jan 14
 
-Monday, Jan 6
-• PROJ-123: Implemented user authentication flow
-• PROJ-124: Fixed login redirect issue
+PROJ-123
+Implemented user authentication flow, added unit tests, and fixed login redirect bug.
 
-Tuesday, Jan 7
-• #42: Added unit tests for auth module
-• PROJ-125: Code review feedback addressed
+PROJ-456
+Code review feedback addressed: updated variable names and extracted constants.
 
 ---
-Total commits: 8
-Days with activity: 2
+Miscellaneous:
+- Updated README.md
+- Tweaked build script
 ```
-
-## Notes
-
-- If no commits found, suggest checking the author email or date range
-- Commits without ticket IDs are grouped under "General"
-- Weekend commits are included but marked with (weekend) tag
