@@ -1,6 +1,5 @@
 {
   "name": "team-tools",
   "version": "1.0.0",
-  "description": "Internal productivity tools for timesheets, standups, and coverage analysis",
-  "commands": "../commands/"
+  "description": "Internal productivity tools for timesheets, standups, and coverage analysis"
 }
