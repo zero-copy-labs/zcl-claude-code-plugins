@@ -9,10 +9,7 @@
   "plugins": [
     {
       "name": "team-tools",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/zero-copy-labs/zcl-claude-code-plugins.git"
-      },
+      "source": ".",
       "description": "Timesheet, standup, and coverage gap commands"
     }
   ]

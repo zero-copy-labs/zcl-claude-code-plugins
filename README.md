@@ -12,17 +12,23 @@ Internal productivity tools for Claude Code.
 
 ## Installation
 
-**Slash command** (in Claude Code session):
+**Step 1: Add the marketplace**
 ```
-/plugin install https://github.com/zero-copy-labs/zcl-claude-code-plugins.git
+/plugin marketplace add zero-copy-labs/zcl-claude-code-plugins
 ```
 
-**CLI** (in terminal):
+**Step 2: Install the plugin**
+```
+/plugin install team-tools@zcl-claude-code-plugins
+```
+
+Or use the CLI:
 ```bash
-claude plugin install https://github.com/zero-copy-labs/zcl-claude-code-plugins.git
+claude plugin marketplace add zero-copy-labs/zcl-claude-code-plugins
+claude plugin install team-tools@zcl-claude-code-plugins --scope user
 ```
 
-Optional `--scope` flag: `user` (default), `project`, or `local`.
+Scope options: `user` (default), `project`, or `local`.
 
 ## Command Details
 
