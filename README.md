@@ -88,11 +88,15 @@ Finds files lacking test coverage.
 
 ```
 .claude-plugin/
-└── plugin.json      # Plugin manifest
-commands/
-├── timesheet.md     # /team-tools:timesheet command
-├── standup.md       # /team-tools:standup command
-└── coverage-gaps.md # /team-tools:coverage-gaps command
+└── marketplace.json          # Marketplace catalog
+plugins/
+└── team-tools/
+    ├── .claude-plugin/
+    │   └── plugin.json       # Plugin manifest
+    └── commands/
+        ├── timesheet.md      # /team-tools:timesheet command
+        ├── standup.md        # /team-tools:standup command
+        └── coverage-gaps.md  # /team-tools:coverage-gaps command
 ```
 
 ## License
