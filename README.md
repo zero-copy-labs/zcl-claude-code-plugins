@@ -12,9 +12,17 @@ Internal productivity tools for Claude Code.
 
 ## Installation
 
+**Slash command** (in Claude Code session):
 ```
-/install-plugin https://github.com/zero-copy-labs/zcl-claude-code-plugins.git
+/plugin install https://github.com/zero-copy-labs/zcl-claude-code-plugins.git
 ```
+
+**CLI** (in terminal):
+```bash
+claude plugin install https://github.com/zero-copy-labs/zcl-claude-code-plugins.git
+```
+
+Optional `--scope` flag: `user` (default), `project`, or `local`.
 
 ## Command Details
 
@@ -74,12 +82,11 @@ Finds files lacking test coverage.
 
 ```
 .claude-plugin/
-├── marketplace.json # Marketplace listing
 └── plugin.json      # Plugin manifest
 commands/
-├── timesheet.md     # /timesheet command
-├── standup.md       # /standup command
-└── coverage-gaps.md # /coverage-gaps command
+├── timesheet.md     # /team-tools:timesheet command
+├── standup.md       # /team-tools:standup command
+└── coverage-gaps.md # /team-tools:coverage-gaps command
 ```
 
 ## License
